@@ -1,14 +1,19 @@
 import filmIcon from "../images/film_icon.svg";
 import logo from "../images/logo.png";
+import uz from "../images/uz.svg";
+import en from "../images/ENG.webp";
+import { useContext } from "react";
+import { Context } from "../context/Context";
 
 function Header() {
+  const { flag, changeLang, lang } = useContext(Context);
   return (
     <header>
       <div class="header__top">
         <img src={filmIcon} alt="film icon" />
-        <p>See no special offer restrictions</p>
+        <p>{lang.restrictions}</p>
       </div>
-      <nav class="header__nav">
+      <nav class="nav">
         <div class="container">
           <a href="" class="header__logo">
             <img src={logo} alt="logo" />
@@ -17,25 +22,41 @@ function Header() {
           <ul class="header__list">
             <li class="header__item">
               <a href="" class="header__link">
-                Films
+                {lang.films}
               </a>
             </li>
             <li class="header__item">
               <a href="" class="header__link">
-                Serials
+                {lang.serials}
               </a>
             </li>
             <li class="header__item">
               <a href="" class="header__link">
-                Cartoons
+                {lang.cartoons}
               </a>
             </li>
             <li class="header__item">
               <a href="" class="header__link">
-                Collections
+                {lang.collections}
               </a>
             </li>
           </ul>
+          <div className="nav__lang">
+            <button
+              className={`nav__lang-btn ${flag === true ? "active" : ""}`}
+              onClick={() => changeLang("uz")}
+            >
+              <span>UZ</span>
+              <img src={uz} alt="uzbek" />
+            </button>
+            <button
+              className={`nav__lang-btn ${flag === false ? "active" : ""}`}
+              onClick={() => changeLang("en")}
+            >
+              <span>EN</span>
+              <img src={en} alt="russian" />
+            </button>
+          </div>
         </div>
       </nav>
     </header>
